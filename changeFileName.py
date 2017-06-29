@@ -4,19 +4,21 @@ import sys
 from PIL import Image 
 
 listfile = os.listdir(os.getcwd())
-fromStr = raw_input("²éÕÒÎÄ¼şÃû¹Ø¼ü×Ö: ")
-toStr = raw_input("Ìæ»»Îª£º")
+fromStr = raw_input("æŸ¥æ‰¾æ–‡ä»¶åå…³é”®å­—: ")
+toStr = raw_input("æ›¿æ¢ä¸ºï¼š")
 fromStrLen = len(fromStr)
 toStrLen = len(toStr)
 changedCount = 0
 for line in listfile:
 
-    if line[0:fromStrLen]== fromStr:
+    sPos = line.find(fromStr)
+    if(sPos >= 0):
+        des = line[0:sPos] + toStr + line[sPos + fromStrLen:]
         if line[-4:]=='.txt':
             inputFile = open(line)
             text = inputFile.read()
             inputFile.close()
-            output = open(toStr+ line[fromStrLen:],'w')
+            output = open(des,'w')
             output.write(text)
             output.close()
             changedCount +=1
@@ -24,10 +26,10 @@ for line in listfile:
         elif(line[-4:]=='.png'):
             try:
                 img = Image.open(line)
-                img.save(toStr + line[fromStrLen:])
+                img.save(des)
                 changedCount +=1
                 os.remove(line)
             except:
-                print(line + "ÎÄ¼şËğ»µ")
-print(str(changedCount) + " ¸öÎÄ¼şÒÑ¾­ÖØÃüÃû³É¹¦£¡")
+                print(line + "æ–‡ä»¶æŸå")
+print(str(changedCount) + "ä¸ªæ–‡ä»¶å·²ç»é‡å‘½åæˆåŠŸï¼")
 os.system('pause')
