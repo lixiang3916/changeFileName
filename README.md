@@ -24,6 +24,6 @@
 将2_150_0_1.txt和2_150_0.png文件替换为3_150_0_1.txt和3_150_0.png
 
 第二种使用方法
->python build py2exe
+>python build.py py2exe
 
 将脚本程序打包成exe，在别的没有Python环境的电脑上使用
